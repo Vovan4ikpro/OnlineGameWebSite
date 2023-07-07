@@ -1,0 +1,220 @@
+<main>
+
+
+  <h1>Heroes List</h1><br><br>
+
+  <h1>Фильтры</h1>
+
+  <div class="filters">
+    <div class="complexity-filter">
+      <span>Складність:</span>
+      <%= link_to heroes_lists_path(sort_complex: 1, hero_name: @hero_name, main_stat: @main_stat), class: "highlightable", data: {complexity: 1} do %>
+        <%= image_tag '/images/slojnost.png', width: 40, height: 30 %>
+      <% end %>
+
+      <%= link_to heroes_lists_path(sort_complex: 2, hero_name: @hero_name, main_stat: @main_stat), class: "highlightable", data: {complexity: 2} do %>
+        <%= image_tag '/images/slojnost.png', width: 40, height: 30 %>
+      <% end %>
+
+      <%= link_to heroes_lists_path(sort_complex: 3, hero_name: @hero_name, main_stat: @main_stat), class: "highlightable", data: {complexity: 3} do %>
+        <%= image_tag '/images/slojnost.png', width: 40, height: 30 %>
+      <% end %>
+      <span id="selected-complexity"></span>
+    </div>
+
+    <div>
+      <span>Атрибут:</span>
+      <%= link_to heroes_lists_path(main_stat: 1, hero_name: @hero_name, sort_complex: @sort_complex), class: "highlightable", data: {attribute: "power"} do %>
+        <%= image_tag '/images/power.png', width: 40, height: 30 %>
+      <% end %>
+
+      <%= link_to heroes_lists_path(main_stat: 2, hero_name: @hero_name, sort_complex: @sort_complex), class: "highlightable", data: {attribute: "agility"} do %>
+        <%= image_tag '/images/agility.png', width: 40, height: 30 %>
+      <% end %>
+
+      <%= link_to heroes_lists_path(main_stat: 3, hero_name: @hero_name, sort_complex: @sort_complex), class: "highlightable", data: {attribute: "intelect"} do %>
+        <%= image_tag '/images/intelect.png', width: 40, height: 30 %>
+      <% end %>
+
+      <%= link_to heroes_lists_path(main_stat: 4, hero_name: @hero_name, sort_complex: @sort_complex), class: "highlightable", data: {attribute: "mixed"} do %>
+        <%= image_tag '/images/mixed.png', width: 40, height: 30 %>
+      <% end %>
+      <span id="selected-attribute"></span>
+    </div>
+
+    <div>
+      <span>Скинути:</span>
+      <%= link_to heroes_lists_path(sort_complex: 4, hero_name: "", main_stat: 5), class: "highlightable" do %>
+        <%= image_tag '/images/refresh.png', width: 40, height: 30 %>
+      <% end %>
+    </div>
+  </div>
+
+
+  <%= form_tag heroes_lists_path, method: :get do %>
+    <%= text_field_tag :hero_name, @hero_name, placeholder: "Шукати по назві героя" %>
+    <%= hidden_field_tag :sort_complex, @sort_complex %>
+    <%= hidden_field_tag :main_stat, @main_stat %>
+    <% if @hero_name.present? %>
+      <%= link_to "×", heroes_lists_path(main_stat: @main_stat, sort_complex: @sort_complex), class: "remove-search" %>
+    <% end %>
+    <%= submit_tag "Шукати" %>
+  <% end %>
+  </div><br>
+
+  <style>
+    /* Заголовок */
+
+    .highlightable {
+      position: relative;
+    }
+
+    .highlightable::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: yellow;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .highlightable:hover::after,
+    .highlighted::after {
+      opacity: 1;
+    }
+
+    body {
+      /*background-color: #203145;*/
+      background-size: 100%;
+      background-color: #000;
+      background-repeat: no-repeat;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-image: url('images/log_in.jpg');
+    }
+
+    h1 {
+      color: #ffa800;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    span {
+      color: #ffa800;
+      font-size: 28px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    /* Фильтры */
+    .filters {
+      /*display: flex;*/
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Ссылки */
+    a {
+      color: #ffa800;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #ff6800;
+    }
+
+    /* Изображение героя */
+    /*img {*/
+    /*  max-width: 100%;*/
+    /*  height: auto;*/
+    /*  border-radius: 50%;*/
+    /*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);*/
+    /*}*/
+
+    /* Стрелки сортировки */
+    .fa-sort {
+      color: #ffa800;
+      text-decoration: none;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+
+    .fa-sort:hover {
+      color: #ff6800;
+    }
+
+    /* Поле ввода и кнопка поиска */
+    input[type="text"] {
+      padding: 8px;
+      width: 200px;
+      border: none;
+      border-radius: 4px;
+      background-color: #222;
+      color: #fff;
+    }
+
+    input[type="submit"] {
+      padding: 8px 16px;
+      background-color: #ffa800;
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #ff6800;
+    }
+
+    /* Кнопка удаления поиска */
+    .remove-search {
+      color: #ff0000;
+      text-decoration: none;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
+
+    .remove-search:hover {
+      color: #ff6800;
+    }
+
+    .footer {
+      background-color: #1a1a1a;
+      padding: 30px 0;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .footer img {
+      max-width: 50px;
+      height: auto;
+      min-width: 100px;
+      margin: 10px;
+    }
+
+    main {
+      padding-bottom: 70px;
+      padding-top: 40px;
+    }
+
+    * {
+      margin: 0;
+    }
+  </style>
+
+  <% @heroes_lists.each do |heroes_list| %>
+    <% if heroes_list.hero_picture.attached? %>
+      <a href="<%= heroes_list_path(heroes_list) %>">
+        <%= image_tag heroes_list.hero_picture %>
+      </a>
+    <% end %>
+
+  <% end %>
+</main>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OnlineGameWebSite</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <div class="header">
+    <%= link_to 'Головна', pages_home_path %>
+    <%= link_to 'Герої', heroes_lists_path %>
+    <%= link_to 'Оновлення', version_lists_path %>
+    <a style="color: #293d58;">..................................
+      ............................................................
+      ..........................................................................................
+    </a>
+    <% if user_signed_in? %>
+      <%= link_to user_path(current_user) do %>
+        <%= image_tag '/images/avatar.png', width: 30, height: 30 %>
+      <% end %>
+    <% end %>
+    <div class="user-info">
+      <% if user_signed_in? %>
+        <div class="user-email"><%= current_user.username %></div>
+        <%= button_to "Sign Out", destroy_user_session_path, method: :delete, class: "user_buttons" %>
+      <% else %>
+        <%= button_to "Sign in", new_user_session_path, class: "user_buttons" %>
+      <% end %>
+    </div>
+  </div>
+  <body>
+    <%= yield %>
+  </body>
+</html>
+
+<style>
+  /* Стили для шапки */
+  body {
+    margin: 0;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #293d58;
+    color: #fff;
+    padding: 2px;
+    font-size: 18px;
+    /*background-color: transparent;*/
+    margin: 0;
+  }
+
+  .header a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+  }
+
+  .header a:hover {
+    text-decoration: underline;
+  }
+</style>

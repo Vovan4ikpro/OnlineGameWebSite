@@ -1,0 +1,70 @@
+
+<h1>Змінити улюблених героїв</h1>
+
+<%= form_with(model: @user_favorites_hero, url: user_favorites_hero_path(@user_favorites_hero), method: :patch) do |form| %>
+
+  <div class="field">
+    <%= form.label "Улюбленний герой 1" %>
+    <%= form.collection_select :favorites_hero_1_id, @heroes_list, :id, :hero_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Улюбленний герой 2" %>
+    <%= form.collection_select :favorites_hero_2_id, @heroes_list, :id, :hero_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label "Улюбленний герой 3" %>
+    <%= form.collection_select :favorites_hero_3_id, @heroes_list, :id, :hero_name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Оновити героїв"%>
+  </div>
+<% end %>
+<%= link_to 'Повернутися в профіль', user_path(current_user), class: "linkForBack" %>
+
+<style>
+  * {
+    margin: 0;
+  }
+
+  .linkForBack {
+    /*margin: 10px;*/
+    color:#0FF;
+  }
+  select {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #283d56;
+    color: #f5f5f5;
+    font-size: 12px;
+  }
+
+  body {
+    background-color: #203145;
+    color: #FFF;
+    font-family: 'Arial', sans-serif;
+    background-repeat: no-repeat;
+    margin: 0;
+    text-align: center;
+    /*padding: 0 20px;*/
+  }
+
+  .field {
+    margin-bottom: 20px;
+  }
+
+  input[type="submit"] {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 10px;
+    background-color: #ff9900;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>

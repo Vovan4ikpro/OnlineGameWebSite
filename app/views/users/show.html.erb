@@ -1,0 +1,194 @@
+<h1><%= @user.username %></h1>
+<div class="user-photo-and-info">
+<% if @user.avatar.attached? %>
+  <%= image_tag @user.avatar, width: 200, height: 200 %>
+<% end %>
+<div class="birthdate-and-email">
+  <p class = "birth">Дата народження: <%= @user.birth_date %></p>
+  <p class = "email">Email: <%= @user.email %></p>
+  <% if @user.user_more_info.present? %>
+    <p class = "rating">Рейтинг: <%= @user.user_more_info.last.rating %></p>
+    <p class = "point">Оцінка: <%= @user.user_more_info.last.grade %></p>
+    <p class = "opinion"> Думка: <%= @user.user_more_info.last.review %></p>
+    <p class = "version">Версія: <%= @user.user_more_info.last.version_list.version_number %></p>
+</div>
+</div>
+
+<%= link_to 'Редагувати дані користувача', edit_user_path(current_user) %>
+
+    <div class="favorites_heroes">
+      <h1> Улюблені герої </h1>
+      <% if HeroesList.find(@user.user_more_info.last.user_favorites_hero.favorites_hero_1_id).hero_picture.attached? %>
+
+        <a href="<%= heroes_list_path(HeroesList.find(@user.user_more_info.last.user_favorites_hero.favorites_hero_1_id)) %>">
+          <%= image_tag HeroesList.find(@user.user_more_info.last.user_favorites_hero.favorites_hero_1_id).hero_picture %>
+        </a>
+      <% end %>
+
+      <% if HeroesList.find(@user.user_more_info.last.user_favorites_hero.favorites_hero_2_id).hero_picture.attached? %>
+
+        <a href="<%= heroes_list_path(HeroesList.find(@user.user_more_info.last.user_favorites_hero.favorites_hero_2_id)) %>">
+          <%= image_tag HeroesList.find(@user.user_more_info.last.user_favorites_hero.favorites_hero_2_id).hero_picture %>
+        </a>
+      <% end %>
+
+      <% if HeroesList.find(@user.user_more_info.last.user_favorites_hero.favorites_hero_3_id).hero_picture.attached? %>
+
+        <a href="<%= heroes_list_path(HeroesList.find(@user.user_more_info.last.user_favorites_hero.favorites_hero_3_id)) %>">
+          <%= image_tag HeroesList.find(@user.user_more_info.last.user_favorites_hero.favorites_hero_3_id).hero_picture %>
+        </a>
+      <% end %>
+    </div>
+
+    <% if @user.user_more_info.last.version_list.id != VersionList.last.id %>
+      <a>Введите новые данные</a>
+      <%= form_with(model: @user_more_info, url: user_more_infos_path) do |form| %>
+
+        <div class="field">
+          <%= form.label :rating %>
+          <%= form.text_field :rating %>
+        </div>
+
+        <div class="field">
+          <%= form.label :grade %>
+          <%= form.text_field :grade %>
+        </div>
+
+        <div class="field">
+          <%= form.label :review %>
+          <%= form.text_field :review %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit %>
+        </div>
+      <% end %>
+    <% end %>
+
+
+    <% if @user.user_more_info.last.version_list.id == VersionList.last.id %>
+      <%= link_to 'Замінити улюблених героїв', edit_user_favorites_hero_path(@user.user_more_info.last.user_favorites_hero) %>
+    <% end %>
+    <br>
+    <%= link_to 'Переглянути всю історію цього юзера', user_more_info_path(@user) %>
+  <% else %>
+
+    <a>Введіть дані користувача</a>
+    <%= form_with(model: @user_more_info, url: user_more_infos_path) do |form| %>
+      <div class="field">
+        <%= form.label "Рейтинг" %>
+        <%= form.text_field :rating %>
+      </div>
+
+      <div class="field">
+        <%= form.label "Оцінка версії" %>
+        <%= form.text_field :grade %>
+      </div>
+
+      <div class="field">
+        <%= form.label "Коментар" %>
+        <%= form.text_field :review %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "Додати"%>
+      </div>
+    <% end %>
+  <% end %>
+
+
+  <style>
+
+    .birthdate-and-email {
+      display: inline-block;
+      margin-left: 20px;
+    }
+    .birth,
+    .email,
+    .opinion,
+    .rating,
+    .point,
+    .version {
+      font-family: Arial, sans-serif;
+      font-size: 22px;
+    }
+    body {
+      background-color: #203145;
+      color: #FFF;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      /*padding: 20px;*/
+    }
+    .user-info {
+      float: right;
+      /*margin-left: 50px;*/
+    }
+    h1 {
+      color: #F00;
+      font-size: 24px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    a {
+      color: #0FF;
+      text-decoration: none;
+    }
+
+    .favorites_heroes {
+      text-align: center;
+      padding: 50px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    .field {
+      margin-bottom: 10px;
+    }
+
+    .field label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .field input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #FFF;
+      background-color: #111;
+      color: #FFF;
+    }
+
+    .actions {
+      margin-top: 10px;
+    }
+
+    .actions input[type="submit"] {
+      background-color: #F00;
+      color: #FFF;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .actions input[type="submit"]:hover {
+      background-color: #800;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>

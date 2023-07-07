@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hero_name: MyString
+  hero_statistic: one
+  description: MyString
+
+two:
+  hero_name: MyString
+  hero_statistic: two
+  description: MyString

@@ -1,0 +1,187 @@
+<div class="container">
+
+  <div class="hero-info">
+    <h1 id="hero-name"><%= @heroes_list.hero_name %></h1>
+
+    <% if @heroes_list.hero_picture.attached? %>
+      <%= image_tag @heroes_list.hero_picture %>
+    <% end %>
+
+    <p><strong>Атрибут:</strong> <%= @heroes_list.heroes_statistic.hero_type_list.main_stat %></p>
+    <p><strong>Складність:</strong> <%= @heroes_list.heroes_statistic.complexity %></p>
+    <p><strong>Тип атаки:</strong> <%= @heroes_list.heroes_statistic.hero_attack_type_list.attack %></p>
+    <p><strong>Сила:</strong> <%= @heroes_list.heroes_statistic.hero_attributes_list.power %></p>
+    <p><strong>Ловкість:</strong> <%= @heroes_list.heroes_statistic.hero_attributes_list.agility %></p>
+    <p><strong>Інтелект:</strong> <%= @heroes_list.heroes_statistic.hero_attributes_list.intellect %></p>
+    <p><strong>Атака:</strong> <%= @heroes_list.heroes_statistic.attack %></p>
+    <p><strong>Захист:</strong> <%= @heroes_list.heroes_statistic.defense %></p>
+  </div>
+
+  <div class="hero-description">
+    <p><strong>Опис Героя:</strong> <%= @heroes_list.description %></p>
+  </div>
+  <div class="video-container">
+    <video id="dynamic-video" autoplay loop muted>
+      <source src="" type="video/webm">
+    </video>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/dota_footer_logo.png" alt="Dota 2" />
+
+    <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/valve_logo.png" alt="Valve" />
+    <p>Dota та логотип Dota є товарними знаками та/або зареєстрованими товарними знаками Valve Corporation. 2023 Valve Corporation, усі права захищені.</p>
+  </div>
+</footer>
+<style>
+  * {
+    margin: 0;
+  }
+  .container {
+    display: flex;
+    justify-content: center; /* Центрирование элементов по горизонтали */
+    align-items: center; /* Центрирование элементов по вертикали */
+    background-image: url('/images/background-hero.jpg');
+    background-size: 100%;
+    background-color: #000;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+
+  }
+  .body {
+    margin-bottom: 30px;
+  }
+  .video-container {
+    width: 40%; /* Примерное значение ширины видео, можно изменить по необходимости */
+    /*margin-left: auto; !* Отступ слева, чтобы видео было прижато к правому краю *!*/
+    margin-bottom: auto;
+  }
+
+  .video-container video {
+    width: 100%;
+    top: auto;
+    height: auto;
+    order: -1; /* Задаем меньшее значение порядка */
+  }
+
+  .hero-info {
+    flex: 1;
+    margin-right: 20px;
+    /*text-align: center; */
+  }
+
+  .hero-description {
+    flex: 1;
+    text-align: center; /* Выравнивание текста по центру */
+    max-width: 600px; /* Задаем максимальную ширину */
+    margin-left: 60px; /* Добавляем отступ слева */
+    margin-right: 120px;
+  }
+
+  /* Стили для заголовка */
+  h1 {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #000000;
+  }
+
+  /* Стили для изображения */
+  .hero-info img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .footer img {
+    max-width: 50px;
+    height: auto;
+    min-width: 100px;
+    margin: 15px;
+  }
+  /* Стили для атрибута */
+  p strong {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  /* Стили для остального текста */
+  p {
+    color: black;
+    margin-bottom: 10px;
+  }
+
+  /* Стили для описания героя */
+  p strong:first-child {
+    margin-top: 20px;
+    display: block;
+  }
+
+  /* Стили для таблицы атрибутов */
+  table {
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    background-color: #fff;
+    border: 1px solid #ccc;
+  }
+
+  table th,
+  table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+
+  /* Стили для ячеек таблицы атрибутов */
+  table th {
+    background-color: #f5f5f5;
+    color: #000;
+  }
+
+  table td {
+    background-color: #fff;
+    color: #000;
+  }
+
+  /* Стили для описания героя */
+  p:last-child {
+    margin-top: 20px;
+  }
+  @keyframes backgroundAnimation {
+    0% { background-position: 0 0; }
+    50% { background-position: 50% 50%; }
+    100% { background-position: 100% 100%; }
+  }
+</style>
+
+<script>
+    // Получаем элемент h1 по его идентификатору
+    var heroNameElement = document.getElementById("hero-name");
+
+    // Получаем значение имени героя из текстового содержимого элемента h1
+    var heroName = heroNameElement.textContent;
+    console.log(heroName)
+    if(heroName.toLowerCase() === 'doom') {
+        heroName = 'doom_bringer';
+    } else if (heroName.toLowerCase() === 'anti-mage') {
+        heroName = 'antimage';
+    } else {
+        heroName = heroName.toLowerCase().split(" ").join("_")
+    }
+    var videoSource = `https://cdn.cloudflare.steamstatic.com/apps/dota2/videos/dota_react/heroes/renders/${ heroName.toLocaleLowerCase() }.webm`;
+
+    // Находим элементы video и source
+    var videoElement = document.getElementById("dynamic-video");
+    var sourceElement = videoElement.querySelector("source");
+
+    // Устанавливаем ссылку на видео в атрибут src элемента source
+    sourceElement.src = videoSource;
+
+    // Обновляем видео
+    videoElement.load();
+</script>

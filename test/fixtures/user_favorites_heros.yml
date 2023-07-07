@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  favorites_hero_1: one
+  favorites_hero_2: one
+  favorites_hero_3: one
+
+two:
+  favorites_hero_1: two
+  favorites_hero_2: two
+  favorites_hero_3: two

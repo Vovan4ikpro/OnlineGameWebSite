@@ -1,0 +1,175 @@
+
+
+<div class="welcome-message">
+  <h1>Dota2Guru: Your Source for Dota Wisdom</h1>
+  <style>
+    body {
+      background-color: #203145;
+      color: #ffffff;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .welcome-message {
+      text-align: center;
+      padding: 50px;
+    }
+
+    h1 {
+      font-size: 40px;
+      color: #ffcc00;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 30px;
+    }
+
+    .additional-info {
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .info-item {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease-out forwards;
+      background-color: #203145;
+      color: #ffffff;
+      padding: 40px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .info-item:nth-child(1) {
+      background-image: url('images/first_div.jpg');
+    }
+
+    .info-item:nth-child(3) {
+      background-image: url('/images/muerta.jpg');
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .info-item p {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .info-item h2 {
+      color: #ffcc00;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .homepage_StandardButton_1W4Sc {
+      display: inline-block;
+      cursor: pointer;
+      box-sizing: border-box;
+      font-family: "Radiance", "Noto Sans", sans-serif;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      background-color: #ffcc00;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+
+    .homepage_StandardButton_1W4Sc:hover {
+      background-color: #ffa500;
+    }
+
+    .footer {
+      background-color: #1a1a1a;
+      padding: 30px 0;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .footer img {
+      max-width: 50px;
+      height: auto;
+      min-width: 100px;
+      margin: 10px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+
+    .info-item.show {
+      opacity: 1;
+      transform: translateY(0);
+      animation: fadeUp 1s ease-out forwards;
+      animation-delay: 0.2s;
+    }
+
+    .info-item iframe {
+      width: 100%;
+      height: 300px;
+      margin-bottom: 0;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+
+
+
+  <div class="additional-info">
+    <div class="info-item">
+      <h2>Новини о Dota2</h2>
+      <p>Будьте в курсі останніх новин про Dota2. У нас ви знайдете свіжі статті, огляди турнірів та цікаві матеріали про світ Dota2.</p>
+    </div>
+    <div class="info-item" style="animation-delay: 1s;">
+      <h2>Переглянути що таке Dota2</h2>
+      <iframe width="100" height="100" src="https://www.youtube.com/embed/Y_5zHZGnxN4" frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="info-item" style="animation-delay: 2s;">
+      <h2>Починайте битву</h2>
+      <a href="https://store.steampowered.com/app/570/Dota_2/"><div class="homepage_StandardButton_1W4Sc"><div class="homepage_ButtonText_1YB3f">Грати безкоштовно</div></div></a>
+    </div>
+  </div>
+
+  <script>
+      $(window).scroll(function() {
+          $('.info-item').each(function(index) {
+              var position = $(this).offset().top;
+              var windowHeight = $(window).height();
+              var scrollTop = $(window).scrollTop();
+              var delay = index * 500; // Задержка для каждого блока
+
+              if (position < (scrollTop + windowHeight)) {
+                  var element = $(this);
+                  setTimeout(function() {
+                      element.addClass('show');
+                  }, delay);
+              }
+          });
+      });
+  </script>
+</div>
+<footer class="footer">
+  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/dota_footer_logo.png" alt="Dota 2" />
+
+  <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/valve_logo.png" alt="Valve" />
+  <p>Dota та логотип Dota є товарними знаками та/або зареєстрованими товарними знаками Valve Corporation. 2023 Valve Corporation, усі права захищені.</p>
+</footer>

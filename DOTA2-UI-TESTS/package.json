@@ -1,0 +1,15 @@
+{
+  "name": "dota2-ui-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js features"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cucumber": "^6.0.7",
+    "selenium-webdriver": "^4.9.2"
+  }
+}

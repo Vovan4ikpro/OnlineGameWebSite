@@ -1,0 +1,109 @@
+<h1>Версії оновлень</h1>
+
+
+<% @versions.each do |version| %>
+    | <%= link_to version.version_number, version_list_path(version) %>
+<% end %>
+
+
+<h1><%= @versions.last.version_number %></h1>
+
+<% if @versions.last.image.attached?%>
+  <%= image_tag @versions.last.image, width: 1200, height: 600%>
+<% end %>
+
+<h1> Яке було оновлення: <%= @versions.last.change_information %></h1>
+<% i = 0
+sumgrade = 0%>
+<% @versions.last.user_more_infos.each do |user_more_info| %>
+  <% i += 1
+     sumgrade +=  user_more_info.grade
+     @average_grade = sumgrade / i%>
+<% end %>
+<h2>Середня оцінка: <%= @average_grade %></h2>
+<h3>Відгуки користувачів</h3>
+
+<% @versions.last.user_more_infos.each do |user_more_info| %>
+  <p>Ім'я користувача: <%= user_more_info.user.username %></p>
+  <% if user_more_info.user.avatar.attached?%>
+    <%= image_tag user_more_info.user.avatar, width: 200, height: 200%>
+  <% end %>
+  <p>Рейтинг: <%= user_more_info.rating %></p>
+  <p>Оцінка: <%= user_more_info.grade %></p>
+  <p>Коментар: <%= user_more_info.review %></p>
+  <h3>------------------------------------------------------</h3>
+  <% i += 1
+     sumgrade +=  user_more_info.grade
+     @average_grade = sumgrade / i%>
+<% end %>
+
+<style>
+
+  body {
+    background-color: #203145;
+    color: #FFF;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    text-align: center;
+    /*padding: 20px;*/
+  }
+  h2 {
+    color: #F00;
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    color: #00FFFF;
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+
+  a {
+    color: #0FF;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+
+  .field label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .field input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #FFF;
+    background-color: #111;
+    color: #FFF;
+  }
+
+  .actions input[type="submit"] {
+    background-color: #F00;
+    color: #FFF;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .actions input[type="submit"]:hover {
+    background-color: #800;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+</style>

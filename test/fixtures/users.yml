@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  username: MyString
+  birth_date: 2023-05-20
+  role: one
+
+two:
+  username: MyString
+  birth_date: 2023-05-20
+  role: two

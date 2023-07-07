@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  power: 1
+  agility: 1
+  intellect: 1
+
+two:
+  power: 1
+  agility: 1
+  intellect: 1
